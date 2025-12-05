@@ -17,8 +17,48 @@ def find_max(numbers):
             max_number = num
     return max_number
 
-# Пример использования
+def get_user_list():
+    """
+    Запрашивает у пользователя ввод списка чисел.
+    
+    Returns:
+        list: Список введенных чисел
+    """
+    numbers = []
+    
+    try:
+        n = int(input("Введите количество элементов в массиве: "))
+        
+        if n <= 0:
+            print("Количество элементов должно быть положительным!")
+            return []
+        
+        print(f"Введите {n} чисел:")
+        for i in range(n):
+            while True:
+                try:
+                    num = float(input(f"Элемент {i+1}: "))
+                    numbers.append(num)
+                    break
+                except ValueError:
+                    print("Ошибка! Введите число.")
+    
+    except ValueError:
+        print("Ошибка! Введите целое число для количества элементов.")
+        return []
+    
+    return numbers
+
 if __name__ == "__main__":
-    sample_list = [3, 7, 2, 9, 1, 4]
-    result = find_max(sample_list)
-    print(f"Максимальное число в списке {sample_list} равно: {result}")
+    print("=== Программа поиска максимального числа ===")
+    
+    # Получаем список от пользователя
+    user_numbers = get_user_list()
+    
+    if user_numbers:
+        # Находим максимум
+        result = find_max(user_numbers)
+        print(f"\nСписок чисел: {user_numbers}")
+        print(f"Максимальное число: {result}")
+    else:
+        print("Не удалось получить список чисел.")
